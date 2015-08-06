@@ -1,5 +1,6 @@
 package com.twu.tictactoe;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -16,10 +17,18 @@ import static org.mockito.Mockito.when;
  * @author msloane, @date 8/6/15 1:19 PM
  */
 public class TicTacToeGameTest {
-    @Test public void shouldDrawBoardWhenGameStarts() {
-        PrintStream printStream = mock(PrintStream.class);
 
-        TicTacToeGame game = new TicTacToeGame();
+    private PrintStream printStream;
+    private TicTacToeGame game;
+
+    @Before
+    public void setUp() {
+        printStream = mock(PrintStream.class);
+        game = new TicTacToeGame();
+    }
+
+    @Test public void shouldDrawBoardWhenGameStarts() {
+
         assertThat(game.drawBoard(), is("   |   |   \n" +
                                         "---------\n" +
                                         "   |   |   \n" +
@@ -27,16 +36,21 @@ public class TicTacToeGameTest {
                                         "   |   |   \n"));
     }
 
-    @Test public void shouldRedrawBoardWhenMoveExecuted() {
-        PrintStream printStream = mock(PrintStream.class);
+    @Test public void shouldReturnInvalidMoveWhenInvalidMove() {
+
         Player p1 = mock(Player.class);
         when(p1.toString()).thenReturn("X");
 
-        TicTacToeGame game = new TicTacToeGame();
-        assertThat(game.redrawBoard(1, p1), is(" X |   |   \n" +
-                "---------\n" +
-                "   |   |   \n" +
-                "---------\n" +
-                "   |   |   \n"));
+        game.redrawBoard(1, p1);
+        assertFalse(game.isValidMove(1));
+    }
+
+    @Test public void shouldReturnValidMoveWhenValidMove() {
+
+        Player p1 = mock(Player.class);
+        when(p1.toString()).thenReturn("X");
+
+        game.redrawBoard(1, p1);
+        assertTrue(game.isValidMove(2));
     }
 }

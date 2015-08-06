@@ -47,6 +47,7 @@ public class ApplicationTest {
     public void shouldReturnUserInputWhenInput() throws IOException {
 
         when(reader.readLine()).thenReturn("1");
+        when(game.isValidMove(1)).thenReturn(true);
         int input = app.enterMove();
 
         assertThat(input, is(Integer.parseInt(reader.readLine())));
@@ -71,6 +72,13 @@ public class ApplicationTest {
 
         app.printInstructions();
         verify(printStream).println(contains("Welcome"));
+    }
+
+    @Test
+    public void shouldRepromptMoveWhenLocationIsFilled() {
+
+        app.printInvalidMove();
+        verify(printStream).println(contains("already taken"));
     }
 
 }

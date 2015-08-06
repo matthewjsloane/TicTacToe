@@ -28,7 +28,17 @@ public class Application {
 
     public int enterMove() {
         try {
-            return Integer.parseInt(reader.readLine());
+            boolean validMove = false;
+            int move = 0;
+            while(!validMove) {
+                move = Integer.parseInt(reader.readLine());
+                if (game.isValidMove(move)) {
+                    validMove = true;
+                } else {
+                    printInvalidMove();
+                }
+            }
+            return move;
         } catch (IOException e) {
             printStream.println("There was an error processing your input.");
             return -1;
@@ -41,8 +51,10 @@ public class Application {
 
     public void runGame () {
         startGame();
+
         printMakeMove(p1);
         executeInput(enterMove(), p1);
+
         printMakeMove(p2);
         executeInput(enterMove(), p2);
 
@@ -55,5 +67,9 @@ public class Application {
     public void printInstructions() {
         printStream.println("Welcome to the Tic-Tac-Toe game. Moves are submitted via"
                             + " numbers corresponding to each spot, 1-9, left to right.");
+    }
+
+    public void printInvalidMove() {
+        printStream.println("Location already taken. Please try again!");
     }
 }
