@@ -53,4 +53,41 @@ public class TicTacToeGameTest {
         game.redrawBoard(1, p1);
         assertTrue(game.isValidMove(2));
     }
+
+    @Test public void shouldReturnTrueWhenBoardIsFull() {
+
+        Player p1 = mock(Player.class);
+        Player p2 = mock(Player.class);
+        when(p1.toString()).thenReturn("X");
+        when(p2.toString()).thenReturn("O");
+
+        game.redrawBoard(1, p1);
+        game.redrawBoard(2, p2);
+        game.redrawBoard(3, p1);
+        game.redrawBoard(4, p2);
+        game.redrawBoard(9, p1);
+        game.redrawBoard(8, p2);
+        game.redrawBoard(7, p1);
+        game.redrawBoard(6, p2);
+        game.redrawBoard(5, p1);
+        assertTrue(game.boardIsFull());
+    }
+    @Test public void shouldReturnFalseWhenBoardIsNotFull() {
+
+        Player p1 = mock(Player.class);
+        Player p2 = mock(Player.class);
+        when(p1.toString()).thenReturn("X");
+        when(p2.toString()).thenReturn("O");
+
+        game.redrawBoard(1, p1);
+        game.redrawBoard(2, p2);
+        game.redrawBoard(3, p1);
+        game.redrawBoard(4, p2);
+        game.redrawBoard(9, p1);
+        game.redrawBoard(8, p2);
+        game.redrawBoard(7, p1);
+        game.redrawBoard(6, p2);
+        assertFalse(game.boardIsFull());
+    }
+
 }

@@ -51,13 +51,19 @@ public class Application {
 
     public void runGame () {
         startGame();
+        Player currentPlayer = p1;
 
-        printMakeMove(p1);
-        executeInput(enterMove(), p1);
+        while (!game.boardIsFull()) {
+            printMakeMove(currentPlayer);
+            executeInput(enterMove(), currentPlayer);
+            if (currentPlayer.equals(p1)) {
+                currentPlayer = p2;
+            } else {
+                currentPlayer = p1;
+            }
+        }
 
-        printMakeMove(p2);
-        executeInput(enterMove(), p2);
-
+        printDraw();
     }
 
     public void executeInput(int s, Player player) {
@@ -71,5 +77,9 @@ public class Application {
 
     public void printInvalidMove() {
         printStream.println("Location already taken. Please try again!");
+    }
+
+    public void printDraw() {
+        printStream.println("Game over! It is a draw!");
     }
 }

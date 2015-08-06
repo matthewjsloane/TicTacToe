@@ -81,4 +81,11 @@ public class ApplicationTest {
         verify(printStream).println(contains("already taken"));
     }
 
+    @Test
+    public void shouldPrintDrawWhenGameIsDraw() {
+
+        app.printDraw();
+        verify(printStream).println(contains("draw"));
+    }
+
 }

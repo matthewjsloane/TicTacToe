@@ -59,4 +59,8 @@ public class TicTacToeGame {
     public boolean isValidMove(int i) {
         return !moves.contains((Integer)i);
     }
+
+    public boolean boardIsFull() {
+        return (moves.size() == 9);
+    }
 }
