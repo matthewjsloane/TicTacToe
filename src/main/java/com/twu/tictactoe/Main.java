@@ -4,6 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("hello ");
+        TicTacToeGame game = new TicTacToeGame();
+        Application app = new Application(game, System.out);
+
+        app.startGame();
     }
 }
