@@ -25,9 +25,9 @@ public class TicTacToeGame {
         return moves.get(0) + horizontalDivider + moves.get(1) + horizontalDivider + moves.get(2);
     }
 
-    public String redrawBoard(int x) {
+    public String redrawBoard(int x, Player player) {
         StringBuilder newRow = new StringBuilder(moves.get(getRow(x)));
-        newRow.setCharAt(getColStringLocation(x), 'X');
+        newRow.setCharAt(getColStringLocation(x), player.toString().charAt(0));
         moves.set(getRow(x), newRow.toString());
         return drawBoard();
     }

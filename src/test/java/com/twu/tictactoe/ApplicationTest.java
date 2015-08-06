@@ -10,21 +10,20 @@ import java.io.PrintStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by msloane on 8/6/15.
- */
 public class ApplicationTest {
 
     private PrintStream printStream;
     private TicTacToeGame game;
     private BufferedReader reader;
     private Application app;
+    private Player p1;
+    private Player p2;
 
     @Before
     public void setUp() {
@@ -32,7 +31,9 @@ public class ApplicationTest {
         printStream = mock(PrintStream.class);
         game = mock(TicTacToeGame.class);
         reader = mock(BufferedReader.class);
-        app = new Application(game, printStream, reader);
+        p1 = mock(Player.class);
+        p2 = mock(Player.class);
+        app = new Application(game, printStream, reader, p1, p2);
     }
 
     @Test
@@ -54,16 +55,22 @@ public class ApplicationTest {
     @Test
     public void shouldRedrawBoardWhenInputExecuted() {
 
-        app.executeInput(1);
-        verify(game).redrawBoard(anyInt());
+        app.executeInput(1, p1);
+        verify(game).redrawBoard(anyInt(), (Player) anyObject());
     }
 
     @Test
     public void shouldPrintMakeMoveWhenUserTurn() {
 
-        app.printMakeMove();
+        app.printMakeMove(p1);
         verify(printStream).println(contains("turn"));
     }
 
+    @Test
+    public void shouldPrintInstructionsWhenGameStarts() {
+
+        app.printInstructions();
+        verify(printStream).println(contains("Welcome"));
+    }
 
 }
