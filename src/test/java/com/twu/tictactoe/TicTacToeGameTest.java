@@ -19,10 +19,21 @@ public class TicTacToeGameTest {
         PrintStream printStream = mock(PrintStream.class);
 
         TicTacToeGame game = new TicTacToeGame();
-        assertThat(game.drawBoard(), is("   |   |\n" +
+        assertThat(game.drawBoard(), is("   |   |   \n" +
                                         "---------\n" +
-                                        "   |   |\n" +
+                                        "   |   |   \n" +
                                         "---------\n" +
-                                        "   |   |"));
+                                        "   |   |   \n"));
+    }
+
+    @Test public void shouldRedrawBoardWhenMoveExecuted() {
+        PrintStream printStream = mock(PrintStream.class);
+
+        TicTacToeGame game = new TicTacToeGame();
+        assertThat(game.redrawBoard(1), is(" X |   |   \n" +
+                "---------\n" +
+                "   |   |   \n" +
+                "---------\n" +
+                "   |   |   \n"));
     }
 }
