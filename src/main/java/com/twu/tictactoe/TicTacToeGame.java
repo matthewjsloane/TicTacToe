@@ -14,6 +14,7 @@ public class TicTacToeGame {
     private String horizontalDivider = "---------\n";
     private ArrayList<String> graphicMoves;
     private HashSet<Integer> moves;
+    private boolean playerHasWon;
 
     public TicTacToeGame () {
         graphicMoves = new ArrayList<>();
@@ -21,6 +22,7 @@ public class TicTacToeGame {
         graphicMoves.add("   |   |   \n");
         graphicMoves.add("   |   |   \n");
         graphicMoves.add("   |   |   \n");
+        playerHasWon = false;
     }
 
     public String drawBoard() {
@@ -32,6 +34,10 @@ public class TicTacToeGame {
         newRow.setCharAt(getColStringLocation(x), player.toString().charAt(0));
         graphicMoves.set(getRow(x), newRow.toString());
         moves.add(x);
+        player.addMove(x);
+        if (player.hasWon()){
+            playerHasWon = true;
+        }
         return drawBoard();
     }
 
@@ -57,10 +63,14 @@ public class TicTacToeGame {
 
 
     public boolean isValidMove(int i) {
-        return !moves.contains((Integer)i);
+        return !moves.contains(i);
     }
 
     public boolean boardIsFull() {
         return (moves.size() == 9);
+    }
+
+    public boolean playerHasWon() {
+        return playerHasWon;
     }
 }

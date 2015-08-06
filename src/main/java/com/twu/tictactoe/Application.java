@@ -53,17 +53,22 @@ public class Application {
         startGame();
         Player currentPlayer = p1;
 
-        while (!game.boardIsFull()) {
+        while (!(game.boardIsFull() || game.playerHasWon())) {
             printMakeMove(currentPlayer);
             executeInput(enterMove(), currentPlayer);
-            if (currentPlayer.equals(p1)) {
+            if (game.playerHasWon()){
+                printWin(currentPlayer);
+            }
+            else if (currentPlayer.equals(p1)) {
                 currentPlayer = p2;
             } else {
                 currentPlayer = p1;
             }
         }
 
-        printDraw();
+        if (game.boardIsFull()) {
+            printDraw();
+        }
     }
 
     public void executeInput(int s, Player player) {
@@ -81,5 +86,9 @@ public class Application {
 
     public void printDraw() {
         printStream.println("Game over! It is a draw!");
+    }
+
+    public void printWin(Player p) {
+        printStream.println("Game over! Player '" + p.toString() + "' has won the game!");
     }
 }

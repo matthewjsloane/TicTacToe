@@ -88,4 +88,11 @@ public class ApplicationTest {
         verify(printStream).println(contains("draw"));
     }
 
+    @Test
+    public void shouldPrintWinWhenGameIsWin() {
+
+        app.printWin(p1);
+        verify(printStream).println(contains("won"));
+    }
+
 }

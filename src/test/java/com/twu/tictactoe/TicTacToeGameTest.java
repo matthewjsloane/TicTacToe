@@ -72,6 +72,7 @@ public class TicTacToeGameTest {
         game.redrawBoard(5, p1);
         assertTrue(game.boardIsFull());
     }
+
     @Test public void shouldReturnFalseWhenBoardIsNotFull() {
 
         Player p1 = mock(Player.class);
@@ -89,5 +90,4 @@ public class TicTacToeGameTest {
         game.redrawBoard(6, p2);
         assertFalse(game.boardIsFull());
     }
-
 }
